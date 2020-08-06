@@ -11,7 +11,8 @@ const Posts = ({syncPosts}) => {
 }
 
 //connect gets two parameters helpers functions
-//converts the entire state to a props
+
+//gets state, converts the entire state to a props
 const mapStateToProps = state => {
   return {
     syncPosts: state.posts.posts

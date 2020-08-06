@@ -6,12 +6,10 @@ import {createPost, /*showAlert*/} from '../redux/actions'
 class PostForm extends React.Component {
   constructor(props) {
     super(props)
-    
     this.state = {
       title: ''
     }
   }
-  
   
   submitHandler = event => {
     event.preventDefault()
@@ -19,19 +17,16 @@ class PostForm extends React.Component {
     const {title} = this.state
 
     if (!title.trim()) {
-
       return  /*this.props.showAlert('Title of post can\'t be empty')*/
     }
-
+    
     const newPost = {
       title: title,
       id: Date.now().toString()
     }
-    console.log(newPost)
 
     this.props.createPost(newPost)
     this.setState({ title: '' })
-    
   }
   
   changeInputHandler = event => {
@@ -44,9 +39,7 @@ class PostForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.submitHandler}>
-        
         {/*{this.props.alert && <Alert text={this.props.alert} />}*/}
-        
         <div className="form-group">
           <label htmlFor="title">Title of Post</label>
           <input
