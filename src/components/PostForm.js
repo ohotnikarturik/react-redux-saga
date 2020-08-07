@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createPost, /*showAlert*/} from '../redux/actions'
+import {createPost, showAlert} from '../redux/actions'
+import { Alert } from "./Alert";
 // import {Alert} from './Alert'
 
 class PostForm extends React.Component {
@@ -17,7 +18,7 @@ class PostForm extends React.Component {
     const {title} = this.state
 
     if (!title.trim()) {
-      return  /*this.props.showAlert('Title of post can\'t be empty')*/
+      return  this.props.showAlert('Title of post can\'t be empty')
     }
     
     const newPost = {
@@ -39,7 +40,7 @@ class PostForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.submitHandler}>
-        {/*{this.props.alert && <Alert text={this.props.alert} />}*/}
+        {this.props.alert && <Alert message={this.props.alert} />}
         <div className="form-group">
           <label htmlFor="title">Title of Post</label>
           <input
@@ -57,12 +58,16 @@ class PostForm extends React.Component {
   }
 }
 
+//gets actions, then passing data to actions or make action with actions and actions passing data or action to reducer,
+// then reducer changing initial sate, also gives props{state} for this PostForm component
 const mapDispatchToProps = {
-  createPost: createPost
+  createPost: createPost,
+  showAlert: showAlert
 }
 
-// const mapStateToProps = state => ({
-//   alert: state.app.alert
-// })
+//is used for selecting the part of the data from the store that the connected component needs
+const mapStateToProps = state => ({
+  alert: state.app.alert
+})
 
-export default connect(null, mapDispatchToProps)(PostForm)
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
